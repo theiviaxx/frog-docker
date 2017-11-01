@@ -1,0 +1,33 @@
+version: '3'
+services:  
+  nginx:
+    image: nginx:latest
+    container_name: ng01
+    ports:
+      - "80:80"
+    volumes:
+      - ./src:/src
+      - ./config/nginx:/etc/nginx/conf.d
+      - ./static:/mnt/static
+    depends_on:
+      - web
+  web:
+    build: .
+    container_name: dg01
+    working_dir: /src
+    environment:
+      PYTHONPATH: $PYTHONPATH:/config
+    command: bash -c "python manage.py migrate && python manage.py loaddata /config/initial_data.json && gunicorn dev.wsgi -b 0.0.0.0:8000 --pythonpath /config"
+    depends_on:
+      - db
+    volumes:
+      - ./config:/config
+      - ./static:/mnt/static
+    ports:
+      - "8000:8000"
+    expose:
+      - "8000"
+
+  db:
+    image: postgres:latest
+    container_name: ps01
