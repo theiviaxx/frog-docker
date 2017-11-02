@@ -17,7 +17,6 @@ ENV PYTHONUNBUFFERED 1
 RUN mkdir /config
 WORKDir /config
 COPY /config/requirements.txt /config/
-COPY /config/django-frog-2.0.0.tar.gz /config/
 RUN pip install -r /config/requirements.txt
 
 # Project
