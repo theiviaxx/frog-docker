@@ -16,7 +16,7 @@ RUN apt-get -y install yasm nasm \
                 checkinstall
 
 WORKDIR /tmp
-RUN wget https://www.ffmpeg.org/releases/ffmpeg-snapshot.tar.bz2
+RUN wget http://www.ffmpeg.org/releases/ffmpeg-snapshot.tar.bz2
 RUN tar jxvf ffmpeg-snapshot.tar.bz2
 WORKDIR /tmp/ffmpeg
 RUN ./configure --prefix=/usr
@@ -35,5 +35,6 @@ RUN pip install -r /config/requirements.txt
 RUN mkdir /src
 WORKDIR /src
 COPY /src /src
+RUN mkdir /src/logs
 COPY /config/frog_settings.py /config/
 RUN frog_secret /src

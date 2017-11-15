@@ -8,9 +8,11 @@ services:
     volumes:
       - ./src:/src
       - ./config/nginx:/etc/nginx/conf.d
+      - ./config/admin:/mnt/admin
       - ./static:/mnt/static
     depends_on:
       - web
+  
   web:
     build: .
     container_name: dg01
