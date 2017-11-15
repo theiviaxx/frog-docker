@@ -17,6 +17,10 @@ services:
     working_dir: /src
     environment:
       PYTHONPATH: $PYTHONPATH:/config
+    healthcheck:
+      test: ["/config/wait-for-it.sh", "db:5432"]
+      timeout: 10s
+      retries: 2
     command: bash -c "python manage.py migrate && python manage.py loaddata /config/initial_data.json && gunicorn dev.wsgi -b 0.0.0.0:8000 --pythonpath /config"
     depends_on:
       - db

@@ -1,4 +1,4 @@
-django-frog==2.0.0
+django-frog==2.1.0
 whoosh==2.7.4
 gunicorn==19.6.0  
 psycopg2==2.6.2
