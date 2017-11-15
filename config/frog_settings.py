@@ -9,8 +9,8 @@ MEDIA_ROOT = '/mnt/static/'
 MEDIA_URL = 'static/'
 
 # ffmpeg executable locations
-FROG_FFMPEG = 'ffmpeg'
-FROG_FFPROBE = 'ffprobe'
+FROG_FFMPEG = '/usr/bin/ffmpeg'
+FROG_FFPROBE = '/usr/bin/ffprobe'
 
 # Used in email links
 FROG_SITE_URL = 'http://127.0.0.1/'

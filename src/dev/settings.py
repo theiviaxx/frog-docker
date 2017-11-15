@@ -132,4 +132,6 @@ HAYSTACK_CONNECTIONS = {
     },
 }
 
+import sys
+sys.path.append('/config')
 from frog_settings import *

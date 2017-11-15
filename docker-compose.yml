@@ -19,8 +19,8 @@ services:
       PYTHONPATH: $PYTHONPATH:/config
     healthcheck:
       test: ["/config/wait-for-it.sh", "db:5432"]
-      timeout: 10s
-      retries: 2
+      timeout: 5s
+      retries: 1
     command: bash -c "python manage.py migrate && python manage.py loaddata /config/initial_data.json && gunicorn dev.wsgi -b 0.0.0.0:8000 --pythonpath /config"
     depends_on:
       - db
@@ -35,3 +35,23 @@ services:
   db:
     image: postgres:latest
     container_name: ps01
+
+  vid:
+    build:
+      context: ./
+      dockerfile: Dockerfile-Video
+    container_name: vd01
+    working_dir: /src
+    environment:
+      PYTHONPATH: $PYTHONPATH:/config
+    healthcheck:
+      test: ["/config/wait-for-it.sh", "web:8000"]
+      timeout: 5s
+      retries: 1
+    command: bash -c "python manage.py video_worker"
+    depends_on:
+      - db
+      - web
+    volumes:
+      - ./config:/config
+      - ./static:/mnt/static
