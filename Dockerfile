@@ -38,6 +38,3 @@ COPY /src /src
 RUN mkdir /src/logs
 COPY /config/frog_settings.py /config/
 RUN frog_secret /src
-
-# Copy Django Admin
-RUN cp /usr/local/lib/python2.7/site-packages/django/contrib/admin/static/admin /src -R
