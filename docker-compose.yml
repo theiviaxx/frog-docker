@@ -20,7 +20,7 @@ services:
     environment:
       PYTHONPATH: $PYTHONPATH:/config
     healthcheck:
-      test: ["/config/wait-for-it.sh", "db:5432"]
+      test: ["CMD", "/config/wait-for-it.sh", "db:5432"]
       timeout: 5s
       retries: 1
     command: bash -c "python manage.py migrate && python manage.py loaddata /config/initial_data.json && gunicorn dev.wsgi -b 0.0.0.0:8000 --pythonpath /config"
@@ -47,7 +47,7 @@ services:
     environment:
       PYTHONPATH: $PYTHONPATH:/config
     healthcheck:
-      test: ["/config/wait-for-it.sh", "web:8000"]
+      test: ["CMD", "/config/wait-for-it.sh", "web:8000"]
       timeout: 5s
       retries: 1
     command: bash -c "python manage.py video_worker"
