@@ -6,24 +6,28 @@ services:
     ports:
       - "80:80"
     volumes:
-      - ./src:/src
+      - ./frog_ng/dist:/opt/ng
       - ./config/nginx:/etc/nginx/conf.d
       - ./config/admin:/mnt/admin
       - ./static:/mnt/static
     depends_on:
       - web
   
+  db:
+    image: postgres:latest
+    container_name: ps01
+  
   web:
     build: .
     container_name: dg01
-    working_dir: /src
+    working_dir: /opt/project/dev
     environment:
-      PYTHONPATH: $PYTHONPATH:/config
+      PYTHONPATH: $PYTHONPATH:/opt/config:/opt
     healthcheck:
       test: ["CMD", "/config/wait-for-it.sh", "db:5432"]
       timeout: 5s
       retries: 1
-    command: bash -c "python manage.py migrate && python manage.py loaddata /config/initial_data.json && gunicorn dev.wsgi -b 0.0.0.0:8000 --pythonpath /config"
+    command: bash -c "python manage.py migrate && python manage.py loaddata /opt/frog/frog/fixtures/initial_data.json && gunicorn dev.wsgi -b 0.0.0.0:8000"
     depends_on:
       - db
     volumes:
@@ -34,20 +38,14 @@ services:
     expose:
       - "8000"
 
-  db:
-    image: postgres:latest
-    container_name: ps01
-
   vid:
-    build:
-      context: ./
-      dockerfile: Dockerfile-Video
+    build: .
     container_name: vd01
-    working_dir: /src
+    working_dir: /opt/project/dev
     environment:
-      PYTHONPATH: $PYTHONPATH:/config
+      PYTHONPATH: $PYTHONPATH:/opt/config:/opt
     healthcheck:
-      test: ["CMD", "/config/wait-for-it.sh", "web:8000"]
+      test: ["CMD", "./config/wait-for-it.sh", "web:8000"]
       timeout: 5s
       retries: 1
     command: bash -c "python manage.py video_worker"

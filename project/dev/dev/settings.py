@@ -26,7 +26,7 @@ with open(os.path.join(BASE_DIR, 'secret_key.txt')) as f:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['web', '127.0.0.1', 'frog']
 
 
 # Application definition
@@ -127,11 +127,11 @@ USE_TZ = True
 STATIC_URL = '/media/'
 
 HAYSTACK_CONNECTIONS = {
-    'default': {
-        'ENGINE': 'haystack.backends.simple_backend.SimpleEngine',
-    },
+    "default": {
+        "ENGINE": "haystack.backends.whoosh_backend.WhooshEngine",
+        "PATH": os.path.join(BASE_DIR, "whoosh_index"),
+    }
 }
-
 
 # -- Logging
 LOGDIR = os.path.join(BASE_DIR, 'logs')
@@ -201,7 +201,4 @@ LOGGING = {
     }
 }
 
-
-import sys
-sys.path.append('/config')
 from frog_settings import *

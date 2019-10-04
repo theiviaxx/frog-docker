@@ -11,6 +11,7 @@ MEDIA_URL = 'static/'
 # ffmpeg executable locations
 FROG_FFMPEG = '/usr/bin/ffmpeg'
 FROG_FFPROBE = '/usr/bin/ffprobe'
+FROG_VIDEO_TEMP = '/tmp'
 
 # Used in email links
 FROG_SITE_URL = 'http://127.0.0.1/'

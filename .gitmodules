@@ -1,0 +1,6 @@
+[submodule "Frog"]
+	path = Frog
+	url = git@github.com:ubd-frog/Frog.git
+[submodule "frog_ng"]
+	path = frog_ng
+	url = https://github.com/ubd-frog/frog_ng
