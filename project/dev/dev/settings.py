@@ -26,7 +26,7 @@ with open(os.path.join(BASE_DIR, 'secret_key.txt')) as f:
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['web', '127.0.0.1', 'frog']
+ALLOWED_HOSTS = ['127.0.0.1']
 
 
 # Application definition
@@ -125,6 +125,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
 STATIC_URL = '/media/'
+MEDIA_ROOT = '/mnt/static/'
+MEDIA_URL = 'static/'
 
 HAYSTACK_CONNECTIONS = {
     "default": {
@@ -200,5 +202,10 @@ LOGGING = {
         },
     }
 }
+
+# ffmpeg executable locations
+FROG_FFMPEG = '/usr/bin/ffmpeg'
+FROG_FFPROBE = '/usr/bin/ffprobe'
+FROG_VIDEO_TEMP = '/tmp'
 
 from frog_settings import *
