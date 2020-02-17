@@ -16,6 +16,8 @@ services:
   db:
     image: postgres:latest
     container_name: ps01
+    environment:
+      POSTGRES_HOST_AUTH_METHOD: trust
   
   web:
     build: .
