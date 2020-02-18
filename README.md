@@ -17,6 +17,15 @@ $ docker-compose up --build
 
 That's it.  This might take some time at first as it will need to download other docker images and also grab ffmpeg.  Once it is complete, it should start hosting of port `:80` immediately.
 
+If you pull a new version of this repo, be sure to run the followng commands:
+
+```
+$ git pull
+$ git submodule update --init --recursive
+```
+
+Now everything should be updated and ready to use
+
 ## Config
 
 There isn't a whole lot to configure, but what there is it's in the `config/frog_settings.py` file in this repo.  Simply edit the values you need and then run it again as above.
