@@ -26,7 +26,7 @@ One of the main things you may need to configure differently is the statis file 
 For example, say we have our repo at `/opt/frog-docker` and our storage mount is at `/mnt/my_storage`, you would create a symlink with:
 
 ```
-$ sudo mklink -s /mnt/my_storage /opt/frog-docker/static
+$ sudo ln -s /mnt/my_storage /opt/frog-docker/static
 ```
 
 And then start the server as before with the `docker-compose up --build` command
