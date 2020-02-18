@@ -17,6 +17,12 @@ $ docker-compose up --build
 
 That's it.  This might take some time at first as it will need to download other docker images and also grab ffmpeg.  Once it is complete, it should start hosting of port `:80` immediately.
 
+## Config
+
+There isn't a whole lot to configure, but what there is it's in the `config/frog_settings.py` file in this repo.  Simply edit the values you need and then run it again as above.
+
+The one setting of note would be `ALLOWED_HOSTS`, add the server IP in that list as well as the hostname if available.
+
 ## Notes
 
 ### Storage Path
